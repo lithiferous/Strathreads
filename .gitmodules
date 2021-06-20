@@ -1,0 +1,3 @@
+[submodule "dev/Temporal"]
+	path = dev/Temporal
+	url = https://github.com/lithiferous/Temporal.jl

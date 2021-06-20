@@ -20,11 +20,9 @@ function supervise(strat::Strategy;
         action = false
         signal = "hold"
         while(cnt < limit)
-            println(N-cnt-1)
             for (i,rule) in enumerate(strat.rules)
                 if trades[N-cnt-1,i] != 0
                     signal = string(rule.action)
-                    println(signal)
                     action = true; break
                 end
             end

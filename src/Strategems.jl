@@ -29,7 +29,7 @@ module Strategems
         # strategies
         Strategy, generate_trades, generate_trades!, backtest, backtest!, optimize, optimize!, summarize_results,
         # filters
-        filterTradesNum,
+        filterTradesNum, supervise,
         # coin specific
         pathCoins
 
@@ -45,4 +45,5 @@ module Strategems
     include("compute/backtest.jl")
     include("compute/optimize.jl")
     include("observe/filter.jl")
+    include("observe/supervise.jl")
 end

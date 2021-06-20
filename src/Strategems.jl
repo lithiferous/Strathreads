@@ -3,13 +3,13 @@ __precompile__(true)
 module Strategems
     using Dates
     using Temporal
-    using Indicators 
+    using Indicators
     using Random
     using ProgressMeter
 
     export
         # universe definitions
-        Universe, gather!, get_overall_index,
+        Universe, gather!, gather, get_overall_index,
         # parameter sets
         ParameterSet, count_runs, generate_combinations, generate_dict,
         # indicators
@@ -27,7 +27,11 @@ module Strategems
         # summary statistic calculations
         cum_pnl,
         # strategies
-        Strategy, generate_trades, generate_trades!, backtest, backtest!, optimize, optimize!, summarize_results
+        Strategy, generate_trades, generate_trades!, backtest, backtest!, optimize, optimize!, summarize_results,
+        # filters
+        filterTradesNum,
+        # coin specific
+        pathCoins
 
     include("model/universe.jl")
     include("model/paramset.jl")
@@ -40,5 +44,5 @@ module Strategems
     include("model/strategy.jl")
     include("compute/backtest.jl")
     include("compute/optimize.jl")
-
+    include("observe/filter.jl")
 end

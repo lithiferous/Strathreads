@@ -29,7 +29,8 @@ module Strategems
         # strategies
         Strategy, generate_trades, generate_trades!, backtest, backtest!, optimize, optimize!, summarize_results,
         # filters
-        filterTradesNum, supervise,
+#        filterTradesNum,
+        supervise,
         # coin specific
         pathCoins
 

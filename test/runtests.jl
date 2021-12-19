@@ -1,4 +1,4 @@
-using Strategems, Temporal, Indicators
+using Strathreads, Temporal, Indicators
 using Dates
 using Test
 

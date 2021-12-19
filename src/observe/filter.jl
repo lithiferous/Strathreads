@@ -2,12 +2,16 @@
 Type and methods to simplify data filtering of tradable assets
 =#
 
-#using CSV
-#using DataFrames
-#using HDF5, JLD
-#using Statistics
+using CSV
+using DataFrames
+using Statistics
+using Dates: Date, DateFormat, today, format
 
-pathCoins = "/home/bane/ext_devs/hdd/candlestick_retriever/data/"
+curDate = format(today(), DateFormat("yyyymmdd"))
+
+fileName = "$curDate.filtered"
+#using HDF5, JLD
+
 #function writer(file::String, sep::Char)
 #    d = load("data/computed/data.jld")["data"]
 #    open(file, "a") do io
@@ -33,6 +37,11 @@ pathCoins = "/home/bane/ext_devs/hdd/candlestick_retriever/data/"
 #insertcols!(df, 1, :open_datetime => map(x->(unix2datetime(x/1000)), df.open_time))
 #
 #
+#using CSV
+#using DataFrames
+#using Statistics
+##pathCoins = "/home/bane/ext_devs/hdd/candlestick_retriever/data/"
+#pathCoins = "../../../python/candlestick_retriever/data/"
 #function filterTradesNum(file::String)
 #    open(file, "a") do io
 #        cols = join(["coin", "trades_num_total","trades_days_idle","trades_num_mean"], ',')
@@ -49,5 +58,16 @@ pathCoins = "/home/bane/ext_devs/hdd/candlestick_retriever/data/"
 #        end
 #    end
 #end
+#
+#fileName = "2011111.filtered" 
+#
+#filterTradesNum(fileName)
+#df = CSV.File(fileName)
+#max_trades = maximum(df.trades_days_idle)
+#println(max_trades)
+#mask = df.trades_days_idle ./ max_trades * 100 .> 10
+#df[mask, :]
+#using HDF5, JLD
+
 
 

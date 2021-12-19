@@ -1,6 +1,6 @@
 __precompile__(true)
 
-module Strategems
+module Strathreads
     using Dates
     using Temporal
     using Indicators

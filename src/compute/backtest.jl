@@ -16,7 +16,6 @@ function generate_trades(strat::Strategy;
         for (i,rule) in enumerate(strat.rules);
             trades[:,i] = rule.trigger.fun(indicator_data)
         end
-
         all_trades[asset] = trades
     end
     return all_trades

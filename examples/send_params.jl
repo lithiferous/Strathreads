@@ -1,2 +1,2 @@
-using Pkg; Pkg.activate(".")
+using Pkg; Pkg.activate("../.")
 

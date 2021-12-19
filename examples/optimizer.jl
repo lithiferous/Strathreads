@@ -1,4 +1,4 @@
-using Pkg; Pkg.activate(".")
+using Pkg; Pkg.activate("../.")
 using Strathreads, Temporal, Indicators, Dates
 
 pathCoins = "../../../../python/candlestick_retriever/data/"
@@ -51,4 +51,4 @@ opt = optimize(strat, px_trade=:open, px_close=:close)
 #eval best
 opt_idx = findmax(opt[:,3])[2]
 sets = Dict(zip(arg_names, opt[opt_idx, 1:2]))
-opt[opt_idx, :]
+println(opt[opt_idx, :])

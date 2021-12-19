@@ -1,4 +1,4 @@
-using Pkg; Pkg.activate(".")
+using Pkg; Pkg.activate("../.")
 using CSV
 using DataFrames
 using Dates: Date, DateFormat, today, format

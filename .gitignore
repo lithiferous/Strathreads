@@ -2,5 +2,7 @@
 *.jl.*.cov
 *.jl.mem
 *.swp
+data/
+results/
 
 *.DS_Store

@@ -1,6 +1,0 @@
-- add dotenv path variables
-- seek to push optimisation results to redis
-
-- figure out signals, run test launch on 5 last months
-- observe the behaviour of last month
-- portfolio_setup risk spread  

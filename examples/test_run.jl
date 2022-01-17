@@ -3,23 +3,22 @@ using Pkg; Pkg.activate(root_dir)
 using Strathreads, Temporal, Indicators, Dates
 using DotEnv
 
-cfg = DotEnv.config(path="$root_dir/.env")
-pathCoins = cfg["INPUT_DIR"]
-#assets = ["EOS-USDT"]
-#A
-d= Dict()
-_assets = readlines("../data/211223.trade_list")
-for asset in _assets
-    assets=[asset]
+pathCoins = "../data/test/"
+outDir = "results"
+
+_assets = Base.Filesystem.readdir("data/test/")
+d = load("../data/opts.jld")
+for c in _assets
+    opts = d["macd"][c]
+    assets = [c]
+    
     universe = Universe(assets)
     function datasource(asset::String)::TS
-        savedata_path = joinpath(pathCoins, "$asset.csv")
+        savedata_path = joinpath(pathCoins, asset)
         return Temporal.tsread(savedata_path, indextype=UInt64, format="yyyy-mm-dd HH:MM:SS")
     end
     universe = Universe(assets)
     universe = gather(assets, source=datasource)
-
-    # define indicators and parameter space
     function fun(x::TS; args...)::TS
         close_prices = x[:close]
         macd_ma = macd(close_prices; args...)
@@ -28,37 +27,25 @@ for asset in _assets
         return output
     end
     arg_names = [:nfast, :nslow]
-    arg_defaults = [12, 26]
+    arg_defaults = [trunc(Int, opts[1]),
+                    trunc(Int, opts[2])]
     arg_ranges = [5:1:12, 15:1:35]
     paramset = ParameterSet(arg_names, arg_defaults, arg_ranges)
     indicator = Indicator(fun, paramset)
-
-    # define signals that will trigger trading decisions
+    
     siglong = @signal  MACD ↑ Signal
     sigexit = @signal MACD == Signal
     sigshort = @signal MACD ↓ Signal
-
+    
     # define the trading rules
     longrule = @rule siglong → long 100
     shortrule = @rule sigshort → short 100
     exitrule = @rule sigexit → liquidate 1.0
     rules = (longrule, shortrule, exitrule)
-
-
+    
+    
     # run strategy
     strat = Strategy(universe, indicator, rules)
     bt = backtest(strat, px_trade=:open, px_close=:close, verbose=true)
-    opt = optimize(strat, px_trade=:open, px_close=:close)
-
-    ##visualize
-    #using Plots
-    #gr()
-    #(x, y, z) = (opt[:,i] for i in 1:3)
-    #surface(x, y, z)
-
-    #eval best
-    opt_idx = findmax(opt[:,3])[2]
-    sets = Dict(zip(arg_names, opt[opt_idx, 1:2]))
-    println(opt[opt_idx, :])
-    d[asset] = opt[opt_idx, :]
+    tswrite(bt[c], joinpath(outDir, c))
 end

@@ -1,12 +1,20 @@
-using Pkg; Pkg.activate("../.")
+root_dir = "../."
+using Pkg; Pkg.activate(root_dir)
 using CSV
 using DataFrames
 using Dates: Date, DateFormat, today, format
+import DotEnv
+using Redis
 import Tables.namedtupleiterator
 
+cfg = DotEnv.config(path="$root_dir/.env")
+
+
 curDate = format(today(), DateFormat("yymmdd"))
-srcFile = "../data/$curDate.trade_info"
-dstFile = "../data/$curDate.trade_list"
+#srcFile = "$(cfg["OUTPUT_DIR"])/$curDate.trade_info"
+srcFile = "$(cfg["OUTPUT_DIR"])/211219.trade_info"
+dstFile = "$(cfg["OUTPUT_DIR"])/$curDate.trade_list"
+println(dstFile)
 
 df = CSV.File(srcFile; comment="\n", delim=",", types=[String, Int32, Int32, Float64]) |> DataFrame
 
@@ -27,12 +35,20 @@ function filterOnColumnBigger(df::DataFrame, col::String, coef::Float64)
     copy(df[mask, :])
 end
 
-dfNoIdle = filterOnColumnNotLower(df, "trades_days_idle", coef)
+dfNoIdle = filterOnColumnNotLower(df, "trades_days_idle", 1 - 0.05)
 dfUpTrades = filterOnColumnBigger(dfNoIdle, "trades_num_total", 1 - coef)
+
+#conn = RedisConnection(password=cfg["REDIS_PWD"])
 
 open(dstFile, "w") do io
     coin_vec = namedtupleiterator(dfUpTrades[:, "coin"]).x.x
+    #l = ReentrantLock()
     Threads.@threads for c in coin_vec
         println(io, c)
+        #try
+        #finally
+        #    unlock(l)
+        #end
     end
+#    set(conn, "$(curDate)_coins", coin_vec)
 end

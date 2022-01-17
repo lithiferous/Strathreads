@@ -18,18 +18,6 @@ uuid = "56f22d72-fd6d-98f1-02f0-08ddc0907c33"
 [[deps.Base64]]
 uuid = "2a0f44e3-6c83-55bd-87e4-b1978d98bd5f"
 
-[[deps.Blosc]]
-deps = ["Blosc_jll"]
-git-tree-sha1 = "575bdd70552dd9a7eaeba08ef2533226cdc50779"
-uuid = "a74b3585-a348-5f62-a45c-50e91977d574"
-version = "0.7.2"
-
-[[deps.Blosc_jll]]
-deps = ["Artifacts", "JLLWrappers", "Libdl", "Lz4_jll", "Pkg", "Zlib_jll", "Zstd_jll"]
-git-tree-sha1 = "91d6baa911283650df649d0aea7c28639273ae7b"
-uuid = "0b7ba130-8d10-5ba8-a3d6-c5182647fed9"
-version = "1.21.1+0"
-
 [[deps.Bzip2_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl", "Pkg"]
 git-tree-sha1 = "19a35467a82e236ff51bc17a3a44b69ef35185a2"
@@ -178,12 +166,6 @@ git-tree-sha1 = "d8a578692e3077ac998b50c0217dfd67f21d1e5f"
 uuid = "b22a6f82-2f65-5046-a5b2-351ab43fb4e5"
 version = "4.4.0+0"
 
-[[deps.FileIO]]
-deps = ["Pkg", "Requires", "UUIDs"]
-git-tree-sha1 = "67551df041955cc6ee2ed098718c8fcd7fc7aebe"
-uuid = "5789e2e9-d7fb-5bc7-8068-2c6fae9b9549"
-version = "1.12.0"
-
 [[deps.FilePathsBase]]
 deps = ["Compat", "Dates", "Mmap", "Printf", "Test", "UUIDs"]
 git-tree-sha1 = "04d13bfa8ef11720c24e4d840c0033d145537df7"
@@ -271,18 +253,6 @@ git-tree-sha1 = "53bb909d1151e57e2484c3d1b53e19552b887fb2"
 uuid = "42e2da0e-8278-4e71-bc24-59509adca0fe"
 version = "1.0.2"
 
-[[deps.HDF5]]
-deps = ["Blosc", "Compat", "HDF5_jll", "Libdl", "Mmap", "Random", "Requires"]
-git-tree-sha1 = "698c099c6613d7b7f151832868728f426abe698b"
-uuid = "f67ccb44-e63f-5c2f-98bd-6dc0ccc4ba2f"
-version = "0.15.7"
-
-[[deps.HDF5_jll]]
-deps = ["Artifacts", "JLLWrappers", "LibCURL_jll", "Libdl", "OpenSSL_jll", "Pkg", "Zlib_jll"]
-git-tree-sha1 = "bab67c0d1c4662d2c4be8c6007751b0b6111de5c"
-uuid = "0234f1f7-429e-5d53-9886-15a909be8d59"
-version = "1.12.1+0"
-
 [[deps.HTTP]]
 deps = ["Base64", "Dates", "IniFile", "MbedTLS", "Sockets"]
 git-tree-sha1 = "c7ec02c4c6a039a98a15f955462cd7aea5df4508"
@@ -342,12 +312,6 @@ version = "1.4.0"
 git-tree-sha1 = "a3f24677c21f5bbe9d2a714f95dcd58337fb2856"
 uuid = "82899510-4779-5014-852e-03e436cf321d"
 version = "1.0.0"
-
-[[deps.JLD]]
-deps = ["Compat", "FileIO", "HDF5", "Printf"]
-git-tree-sha1 = "390ed210fcbdaffde2efe7890f39bd1e681a62d7"
-uuid = "4138dd39-2aa7-5051-a626-17a0bb65d9c8"
-version = "0.12.5"
 
 [[deps.JLLWrappers]]
 deps = ["Preferences"]
@@ -469,12 +433,6 @@ version = "0.3.6"
 
 [[deps.Logging]]
 uuid = "56ddb016-857b-54e1-b83d-db4d58db5568"
-
-[[deps.Lz4_jll]]
-deps = ["Artifacts", "JLLWrappers", "Libdl", "Pkg"]
-git-tree-sha1 = "5d494bc6e85c4c9b626ee0cab05daa4085486ab1"
-uuid = "5ced341a-0733-55b8-9ab6-a4889d929147"
-version = "1.9.3+0"
 
 [[deps.MacroTools]]
 deps = ["Markdown", "Random"]

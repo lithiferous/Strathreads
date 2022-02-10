@@ -1,0 +1,5 @@
+add a new job that prepares config to format:
+  x => [y => [a,b]]
+
+maybe:?
+  add from variable to read only subset of data (supervisor as an example, tsread as perfection, ugly cutoff from supervisor will suffise for now)

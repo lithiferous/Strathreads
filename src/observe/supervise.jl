@@ -6,11 +6,13 @@ function supervise(strat::Strategy;
     if isnothing(arg_values)
         arg_values = convert(Vector, strat.indicator.paramset.arg_defaults)
     end
+    @info "first block done"
     if isempty(strat.backtest.trades)
         all_trades = generate_trades(strat, arg_values=arg_values)
     else
         all_trades = strat.backtest.trades
     end
+    @info "stuck here"
 
     for asset in strat.universe.assets
         trades = all_trades[asset].values

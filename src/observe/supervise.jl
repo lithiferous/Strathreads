@@ -14,6 +14,7 @@ function supervise(strat::Strategy;
 
     for asset in strat.universe.assets
         trades = all_trades[asset].values
+        @show trades
         N = size(trades, 1)
 
         cnt = 1
